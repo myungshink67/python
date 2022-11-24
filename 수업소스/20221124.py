@@ -341,10 +341,95 @@ for i in range(h,0,-1) :
 
 '''
 3. 역 직각 삼각형 출력하기
-           공백    *
-*****   :   0      5
- ****   :   1      4
-  ***   :   2      3
-   **   :   3      2
-    *   :   4      1
+           공백         *
+*****   :   0(h-0)      5
+ ****   :   1(h-4)      4
+  ***   :   2(h-3)      3
+   **   :   3(h-2)      2
+    *   :   4(h-1)      1
 '''    
+for i in range(h,0,-1) :
+   print(" " * (h-i),end="") 
+   print("*"*i)
+
+'''
+4. 직각 삼각형 출력하기
+          공백        *
+    *      4(h-1)         1
+   **      3(h-2)         2
+  ***      2(h-3)         3 
+ ****      1(h-4)         4
+*****      0(h-5)         5
+
+'''
+
+for i in range(1,h+1,1) :
+   print(" " * (h-i),end="") 
+   print("*"*i)
+
+##### 문자열 함수 
+'''
+  len(문자열) : 문자열의 길이
+  문자열.count(문자) : 문자열에서 문자의 갯수 리턴
+  문자열.find(문자) : 문자열에서 문자의 위치 리턴
+                     문자가 없는 경우 -1 리턴
+  문자열.index(문자) : 문자열에서 문자의 위치 리턴
+                     문자가 없는 경우 오류 발생
+'''
+a = "hello"
+#a 문자열에서 l문자의 갯수 출력하기
+cnt = 0
+#len(a) : a문자열의 길이 5
+for i in range(len(a)) : # 0 ~ 4까지값
+    if a[i] == 'l' :
+        cnt += 1
+print(a,"에서 l 문자의 갯수:",cnt)  
+      
+print(a,"에서 l 문자의 갯수:",a.count('l'))  
+print(a,"에서 a 문자의 갯수:",a.count('a'))  #0
+
+#a 문자열에서 l문자의 위치(인덱스) 출력하기
+print(a,"에서 l 문자의 위치:",a.find('l'))  #2
+print(a,"에서 l 문자의 위치:",a.index('l')) #2
+ 
+#a 문자열에서 3번인덱스 부터 l문자의 위치(인덱스) 출력하기
+print(a,"에서 l 문자의 위치:",a.find('l',3))  #3
+print(a,"에서 l 문자의 위치:",a.index('l',3)) #3
+#a 문자열에서 3번인덱스 부터 o문자의 위치(인덱스) 출력하기
+print(a,"에서 o 문자의 위치:",a.find('o',3))  #4
+print(a,"에서 o 문자의 위치:",a.index('o',3)) #4
+
+#a 문자열에서 4번인덱스 부터 l문자의 위치(인덱스) 출력하기
+print(a,"에서 l 문자의 위치:",a.find('l',4))  #-1
+print(a,"에서 l 문자의 위치:",a.index('l',4)) #오류
+
+
+#a 문자열에서 a문자의 위치(인덱스) 출력하기
+print(a,"에서 a 문자의 위치:",a.find('a'))  #-1
+print(a,"에서 a 문자의 위치:",a.index('a')) #오류. 예외처리필요
+
+#문자열의 종류 알려주는 함수
+ss = '123'
+ss = 'Aa123'
+ss = 'Aa'
+ss = 'AA'
+ss = 'aa'
+ss = '     '
+ss = '  aa   '
+ss = '  Aa   '
+
+if ss.isdigit() :
+    print(ss,": 숫자")
+if ss.isalpha() :
+    print(ss,": 문자")
+if ss.isalnum() :
+    print(ss,": 문자 또는 숫자")
+if ss.isupper() :
+    print(ss,": 대문자")
+if ss.islower() :
+    print(ss,": 소문자")
+if ss.isspace() :
+    print(ss,": 공백")
+
+
+

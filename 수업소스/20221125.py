@@ -335,4 +335,55 @@ print(numbers)
 clist=['black','white']
 slist=['S','M','L']
 # [(black,S),(black,M),(black,L),(white,S),(white,M),(white,L)]
+#1 반복문이용
+dlist = [] #('black','S'),('black','M'),('black','L'),('white','S')..
+for c in clist :   #'black','white'
+    for s in slist :   #'S','M','L'
+        dlist.append((c,s))
+print(dlist)
+#2 컴프리헨션 방식
+dlist=[(c,s) for c in clist for s in slist] 
+print(dlist)
+
+dlist=list((c,s) for c in clist for s in slist )
+print(dlist)
+
+#두개의 리스트 데이터를 각각 한개식 리스트로 생성하고, 
+# 리스트을 리스트로 생성하기
+dlist=[[c,s] for c in clist for s in slist] 
+print(dlist)
+
+#1 ~10사이의 짝수 제곱값을 가진 set 객체 생성하기
+set1 = {x*x for x in range(1,11) if x%2==0}
+print(set1)
+
+set1 = {x*x for x in range(2,11,2)}
+print(set1)
+
+#dictionary 데이터 생성하기
+products = {"냉장고":220,"건조기":140,"TV":130,"세탁기":150,"컴퓨터":200}
+#200미만의 제품만 product1 객체 저장하기
+product1={} # '건조기':140,'TV':130
+for k in products :  #k=TV
+    if products[k] < 200 :   #130
+       product1[k] = products[k]
+print(product1)
+
+product1={}
+for k in products.keys() :
+    if products[k] < 200 :   
+       product1[k] = products[k]
+print(product1)
+
+product1={} # '건조기':140,'TV':130
+for k,v in products.items() : #k="TV" v=130
+    if v < 200 :   
+       product1[k] = v
+print(product1)
+#컨프리헨션방식
+product2 = { k:v  for k,v in products.items() if v<200}
+print(product2)
+
+product2 = { k:products[k]  for k in products if products[k]<200}
+print(product2)
 

@@ -24,7 +24,7 @@ def fibo(n) :
     num2 = 1
     num3 = num1+num2
     fibolist.append(num3) 
-    for i in range(4,n+1) :
+    for i in range(4,n+1) :  #4~n(입력된 숫자)
         num1 = num2 
         num2 = num3 
         num3 = num1 + num2 
@@ -59,6 +59,21 @@ def calculator(n):
 num = int(input("숫자를 입력하세요")) 
 print(calculator(num))
 
+def calculator(n):
+    if n % 2 == 0:
+        result = 1
+        for i in range(n,0,-1 ):
+            result *=  i
+    else: #홀수
+        result = 0
+        for i in range(n,0,-1 ):
+            result +=  i
+    return result
+
+num = int(input("숫자를 입력하세요")) 
+print(calculator(num))
+
+
 '''
 3. 입력된 자연수가 홀수인지 짝수인지 판별해 주는 함수를
    람다식을 이용하여 작성하기.
@@ -71,6 +86,22 @@ print(calculator(num))
 '''
 num = int(input("자연수를 입력하세요"))
 if ((lambda x: True if x % 2 == 1 else False)(num)) :
+    print(num,"숫자는 홀수 입니다.")
+else :
+    print(num,"숫자는 짝수 입니다.")
+    
+def oddeven(n) :
+    return True if n%2 == 1 else False
+
+num = int(input("자연수를 입력하세요"))
+if (oddeven(num)) :
+    print(num,"숫자는 홀수 입니다.")
+else :
+    print(num,"숫자는 짝수 입니다.")
+    
+
+num = int(input("자연수를 입력하세요"))
+if (num % 2 == 1) :
     print(num,"숫자는 홀수 입니다.")
 else :
     print(num,"숫자는 짝수 입니다.")
@@ -88,7 +119,7 @@ jumin = input("000000-0000000 형태로 주민번호를 입력하세요")
 try :
     index = jumin.index("-") 
     if(index!=6) : 
-        raise ValueError
+        raise ValueError #예외 발생
     gender = jumin[index+1:index+2]
     if(gender== '1' or gender == '3') :
         print("남자")
@@ -99,9 +130,8 @@ try :
 except :
     print("주민번호 입력 오류")    
 
-import re
-#jumin = input("000000-0000000 형태로 주민번호를 입력하세요")
-jumin = "111111-4222222"
+import re   #정규식을 위한 모듈
+jumin = input("000000-0000000 형태로 주민번호를 입력하세요")
 pattern = re.compile(r"\d{6}[-]\d{7}")
 try :
    if  pattern.match(jumin) == None :
@@ -137,8 +167,8 @@ else :
 abc123
 '''    
 
-plain = "abcdefghijklmnopqrstuvwxyz0123456789" 
-cyper = "`~!@#$%^&*()-_+=|[]{};:,./qwertyuiop" 
+plain = "abcdefghijklmnopqrstuvwxyz0123456789" #평문
+cyper = "`~!@#$%^&*()-_+=|[]{};:,./qwertyuiop" #암호문
 
 #1
 src = input("문자를 입력하세요 : ")
@@ -182,7 +212,7 @@ except :
 '''
 num16=input("16진수 입력 : ")
 try :
-   num10= int(num16,16)
+   num10= int(num16,16) #16진수가 아니면 예외 발생
 except ValueError :
    print(num16,"는 16진수가 아닙니다.")
 else :

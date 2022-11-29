@@ -55,8 +55,8 @@ MaxLimitCalculator 클래스에서 value 값은 절대 100 이상의 값을 가�
 '''
     
 cal = MaxLimitCalculator()
-cal.add(500) # 50 더하기
-cal.add(600) # 60 더하기
+cal.add(50) # 50 더하기
+cal.add(60) # 60 더하기
 print(cal.value) # 100 출력
 
 
@@ -82,3 +82,4 @@ code = {'A':'.-', 'B':'-....', 'C':'-.-.', 'D':'-..', 'E':'.', 'F':'..-.', 'G':'
 총합: 355 ,평균: 71.0
 '''
 data= 'hong:90,lee:80,kim:75,park:50,song:60'
+

@@ -359,7 +359,7 @@ os.chdir("c:/Users/KITCOOP")
 os.chdir("D:/20220811/python/수업소스")
 #파일의 정보 조회
 import os.path
-file = "D:/20220811/python/수업소스/data1.txt"
+file = "D:/20220811/python/수업소스"
 if os.path.isfile(file) :
     print(file,"은 파일입니다.")
 elif os.path.isdir(file) :    

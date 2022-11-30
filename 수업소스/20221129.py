@@ -369,3 +369,11 @@ if os.path.exists(file) :
 else :    
     print(file,"은 없습니다.")
 
+class Test :
+    __value = 0
+    def getValue(self) :
+        return self.__value
+    
+t = Test()
+print(t.__value)
+print(t.getValue())

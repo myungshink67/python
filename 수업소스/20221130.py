@@ -287,10 +287,16 @@ param={"studno":5557,"name":'파이썬3',"grade":5,"id":'test3',
        "jumin":'9001011234567'}    
 cur.execute(sql,param)
 conn.commit()
+conn.close()
 
-cur.execute("select * from student where grade=5")
+import cx_Oracle 
+conn = cx_Oracle.connect('kic','1234','localhost/xe')
+cur = conn.cursor() #sql 명령 객체
+
+cur.execute("select * from student where grade=%d" % (5))
 st_list = cur.fetchall()
 for st in st_list :
   print(st)
+
 
     

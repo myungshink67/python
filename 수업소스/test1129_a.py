@@ -18,8 +18,8 @@ test1129_a.py
 200 면적이 더 큰 사각형 입니다.
 '''    
 class Rect :
-    w=0
-    h=0
+    w=0  #가로
+    h=0  #세로
     def __init__(self,w,h) :  #생성자
         self.w = w
         self.h = h
@@ -92,6 +92,7 @@ class MaxLimitCalculator(Calculator) :
     
 cal = MaxLimitCalculator()
 cal.add(50) # 50 더하기
+print(cal.value) # 50 출력
 cal.add(60) # 60 더하기
 print(cal.value) # 100 출력
 
@@ -106,6 +107,8 @@ A : .-
 B : -....
 C : -.-.
 '''
+#code : dictionary
+# value = dictionary객체[key] 
 code = {'A':'.-', 'B':'-....', 'C':'-.-.', 'D':'-..', 'E':'.', 'F':'..-.', 'G':'--.',
 'H':'....', 'I':'..', 'J':'.---', 'K':'-.-', 'L':'.-..', 'M':'--', 'N':'-.',
 'O':'---', 'P':'.--.', 'Q':'--.-', 'R':'.-.', 'S':'...', 'T':'-', 'U':'..-',
@@ -124,7 +127,11 @@ for i in range(len(data1)) :
 
 import re #정규식 모듈 
 data= 'hong:90,lee:80,kim:75,park:50,song:60'
+#\d : 숫자데이터
+# + : 1개이상
+#\d+ : 1개이상의 숫자
 pattern = re.compile("\\d+")  #패턴 생성.
+#list1 : 숫자데이터들의 목록
 list1 = re.findall(pattern, data)
 list1 = list(map(int,list1)) #list1의 요소를 정수형으로 변경 
 print("총합:",sum(list1),",평균:",sum(list1)/len(list1))

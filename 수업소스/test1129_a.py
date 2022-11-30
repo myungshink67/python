@@ -64,7 +64,8 @@ if __name__ == "__main__" :
 '''   
 class Calculator:
       value=0
-
+      #self : 멤버함수에서 매개변수 첫번째 사용
+      #       자기참조변수
       def add(self, val):
           self.value += val
 

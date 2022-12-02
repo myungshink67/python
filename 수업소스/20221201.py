@@ -374,4 +374,41 @@ df0317
 
 data
 
+'''
+df[[컬럼,...]] => 컬럼조회
+df[:] => 범위를 지정. row 조회함.
+'''
+df.info()
+df["Part Number":"Cost"] #row 인식 . 오류
+
+df[:1]   #행조회
+df.iloc[:1] # 행조회
+
+df[:1,:1]   #오류
+df.iloc[:1,:1] # 정상
+
+
+import pandas as pd
+import cx_Oracle as co
+from datetime import datetime
+import sqlite3
+
+conn=sqlite3.connect("mydb")
+sqlite_result = pd.read_sql("select * from member",conn)
+sqlite_result
+conn.close()
+
+start_tm = datetime.now()
+#  DB Connecion
+conn = co.connect("kic", "1234","localhost/xe")
+query_result = pd.read_sql("select * from student", conn)     
+conn.close()
+
+end_tm = datetime.now()
+print('START: ', str(start_tm))
+print('END: ', str(end_tm))
+print('ELAP: ', str(end_tm - start_tm))
+
+query_result.info()
+
 

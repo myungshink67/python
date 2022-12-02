@@ -7,13 +7,17 @@ list3 = [12,... 28]
 10.문제7의 list3객체의 표준편차를 구하는 std1함수를 구현하는 코드를 작성하시오
 
 import math as m
-m.sqrt : sqrt 함수
-c = list3
-평균 :  sum(c)/len(c)
-print("표준편차:",std1(c))
+
 def std1(x) :
+    평균 :  sum(x)/len(x)
+
     for  i in x :
         hap +=  (i - 평균) ** 2
+
     분산 : hap의 평균 : hap/len(x)
-    표준편차 : m.sqrt(hap/len(x))
+
+    표준편차 : m.sqrt(hap/len(x))  m.sqrt : sqrt 함수
+
+c = list3
+print("표준편차:",std1(c))
 

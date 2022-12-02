@@ -106,6 +106,7 @@ for worksheet_name,data in df.items() :
 #pd.concat : DataFrame 객체 연결. 
 # axis=0 : 행을 기준으로 연결
 filtered_row = pd.concat(row_output,axis=0,ignore_index=True)    
-filtered_row.to_excel(writer,sheet_name="sales_2015_allamt",index=False)
+filtered_row.to_excel\
+    (writer,sheet_name="sales_2015_allamt",index=False)
 writer.save() 
 writer.close()

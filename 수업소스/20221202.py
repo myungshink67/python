@@ -339,4 +339,4 @@ plt.plot(sr1)
 plt.title("서울=>경기 인구 이동")
 plt.xlabel("년도")
 plt.ylabel("이동인구수")
-#plt.xticks(rotation="vertical")
+plt.xticks(rotation="vertical") #x축의 레이블을 세로로 표시

@@ -285,15 +285,16 @@ import pandas as pd
 state_geo = "data/us-states.json"
 state_unemployment = "data/US_Unemployment_Oct2012.csv"
 state_data = pd.read_csv(state_unemployment)
+state_data.info()
 m = folium.Map(location=[48, -102], zoom_start=3)
 folium.Choropleth(
-    state_geo, 
-    data=state_data,  
-    columns=["State", "Unemployment"],
-    key_on="feature.id", 
-    fill_color="YlGn",
+    state_geo, #문자열. 파일의 위치인식
+    data=state_data,  #표시할 데이터.
+    columns=["State", "Unemployment"],# 지역명,데이터 컬럼
+    key_on="feature.id", #데이터값, 지도의 위치 연결 컬럼
+    fill_color="YlGn",  #컬러맵
     fill_opacity=0.7,
     line_opacity=0.2,
-    legend_name="Unemployment Rate (%)",
+    legend_name="Unemployment Rate (%)",  #범례명
 ).add_to(m)
 m.save('usa1.html')

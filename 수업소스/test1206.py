@@ -9,12 +9,14 @@ test1206.py
 #1.seaborn 모듈의 iris 데이터 셋을 이용하여  품종별 산점도를 출력하기
 # 20221206-1.png 파일 참조
 
-#2. iris 데이터 셋을 이용하여   각 컬럼의 값을  박스그래프로 작성하기
+#2. iris 데이터 셋을 이용하여  각 컬럼의 값을  박스그래프로 작성하기
 # 20221206-2.png 파일 참조
 
 #3. tips 데이터 셋의 total_bill 별 tip  컬럼의 회귀선을 출력하기
 # 20221206-3.png 파일 참조
 
+import seaborn as sns
+tips = sns.load_dataset("tips")
 #4. tips 데이터에서 점심,저녁별 tip 평균 금액을 막대그래프로 작성하기
 # 20221206-4.png 파일 참조
 

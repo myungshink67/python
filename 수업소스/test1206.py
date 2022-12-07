@@ -17,6 +17,7 @@ test1206.py
 
 import seaborn as sns
 tips = sns.load_dataset("tips")
+tips.info()
 #4. tips 데이터에서 점심,저녁별 tip 평균 금액을 막대그래프로 작성하기
 # 20221206-4.png 파일 참조
 

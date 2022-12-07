@@ -412,10 +412,18 @@ u
 listu = list(u)
 for d in fruits :
     print(d,"=",listu.count(d))
+
+
 '''
-  행정 안전부 : www.mois.go.kr
-    정책자료 -> 주민등록인구통계->연령별인구현황 
-'''    
+ -- 행정안전부 홈페이지 : www.mois.go.kr
+   -> 정책자료 -> 주민등록인구통계 -> 연령별인구현황
+   -> 계:선택, 남여구분:선택안함
+   -> 연령 구분 단위 : 1세
+   -> 만 연령구분 : 0세 ~ 100세이상->검색버튼클릭
+   -> 전체읍면동현황 선택
+   -> csv파일로 다운받기 (age.csv 파일로 이름 변경)
+ -- age.csv 파일 data폴더에 저장하기
+'''
 import csv
 f=open("data/age.csv")
 data = csv.reader(f) #csv 형태의 파일을 읽어 저장
@@ -427,6 +435,7 @@ for row in data :
     if row[0].find(name) >= 0 : #행정구역의 내용에 name값존재?
         print(row)
         name=row[0]
+        
         #숫자의 ,제거
         row = list(map((lambda x:x.replace(",","")),row))
         print(row)

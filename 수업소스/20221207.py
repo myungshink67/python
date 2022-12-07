@@ -335,3 +335,109 @@ np.nonzero(m)
 n=[1,2,0,4,0] #리스트
 type(n)
 np.nonzero(n) #요소의 값이 0이아닌 요소의 인덱스 리턴
+#정규분포값을 가진 임의의 수 10000개를 가진 배열
+#np.random.normal : 정규분포에 맞는 난수 발생 함수
+# (0,1,10000) => (평균,표준편차,데이터갯수)
+#                 평균이 0, 표준편차가 1인 난수들
+o = np.random.normal(0,1,10000)
+o
+o.shape
+o.mean()
+o.std()
+#정규분포 확인 : 히스토그램을 이용하여 확인
+import matplotlib.pyplot as plt
+plt.rcParams['axes.unicode_minus']=False #음수표시 -설정
+plt.hist(o,bins=100)
+
+#평균:2, 표준편차:2 인 난수 10000개를 생성.
+p = np.random.normal(2,2,10000)
+p
+p.mean()
+p.std()
+plt.hist(p,bins=100)
+
+#choice 함수 : 값을 선택.
+#    choice(값의범위,선택갯수,재선택여부)
+#    choice(값의범위,선택갯수,확률)
+#(10,5,replace=False)
+# 10 : 0~ 9사이의 값
+# 5 : 5개 선택
+# replace=True|False : 중복가능|중복불가
+q=np.random.choice(10,5,replace=True)
+q
+
+#1~45사이의 수를 중복없이 6개를 선택한 r배열 생성
+r = np.random.choice(45,6,replace=False) + 1
+r
+#정렬
+r.sort()
+r
+
+#0~3사이의 수를 중복없이 5개 선택.
+#오류. 중복되어야 함
+s=np.random.choice(4,5,replace=False)  #오류. 불가능선택
+s=np.random.choice(4,5,replace=True)
+s
+
+#확률 적용 선택
+# p=[0.1,0.2,0.3,0.2,0.1,0.1] 
+# p의 전체 합: 1 
+
+p=[0.1,0.2,0.3,0.2,0.1,0.1] 
+sum(p)
+
+#choice(값의범위,선택갯수,확률)
+'''
+  선택수  확률    100개 선택시 추정갯수
+    0     0.1     10  
+    1     0.2     20  
+    2     0.3     30
+    3     0.2     20
+    4     0.1     10
+    5     0.1     10
+'''
+t=np.random.choice(6,100,p=[0.1,0.2,0.3,0.2,0.1,0.1])
+t
+listt=list(t) # 리스트 <= 배열
+listt.count(0) #9
+listt.count(1) #18
+listt.count(2) #30
+listt.count(3) #19
+listt.count(4) #12
+listt.count(5) #12
+
+fruits = ["apple","banana","cherries","durian","grapes"]
+u=np.random.choice(fruits,100,p=[0.1,0.2,0.3,0.2,0.2])
+u
+listu = list(u)
+for d in fruits :
+    print(d,"=",listu.count(d))
+'''
+  행정 안전부 : www.mois.go.kr
+    정책자료 -> 주민등록인구통계->연령별인구현황 
+'''    
+import csv
+f=open("data/age.csv")
+data = csv.reader(f) #csv 형태의 파일을 읽어 저장
+type(data)    
+data  #반복문을 통해 한행씩 조회가능
+import matplotlib.pyplot as plt
+name="신림"
+for row in data :
+    if row[0].find(name) >= 0 : #행정구역의 내용에 name값존재?
+        print(row)
+        name=row[0]
+        #숫자의 ,제거
+        row = list(map((lambda x:x.replace(",","")),row))
+        print(row)
+        #0세 컬럼 이후의 셀들을 배열 생성
+        home = np.array(row[3:],dtype=int)
+        print(home)
+        break  #반복문 종료
+    
+#home : 해당동의 나이별 인구수를 배열로 저장
+plt.style.use('ggplot') #스타일 설정
+plt.figure(figsize=(10,5),dpi=100)    
+plt.rc('font',family='Malgun Gothic') #한글 설정
+plt.title(name+' 지역의 인구 구조')
+plt.plot(home) #선그래프 출력

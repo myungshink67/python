@@ -14,15 +14,19 @@ import csv
 import re 
 f=open("data/age.csv")
 data = csv.reader(f) #csv 형태의 파일을 읽어 저장
-type(data)    
+type(data)    #csv형태 파일
 data  #반복문을 통해 한행씩 조회가능
 import matplotlib.pyplot as plt
-name="역삼"
+name="신림"
 for row in data :
     if row[0].find(name) >= 0 : #행정구역의 내용에 name값존재?
         print(row)
 #        name=row[0]
-        name = (re.sub('\(\d*\)', '', row[0]))
+# \( : 그룹의미하는것이 아니고 ( 문자.
+# \\d* : 숫자0개이상
+# \) : ) 문자
+# re.sub(패턴문자,변경문자,대상문자열)
+        name = (re.sub('\(\\d*\)', '', row[0]))
         #숫자의 ,제거
         row = list(map((lambda x:x.replace(",","")),row))
         print(row)
@@ -51,9 +55,9 @@ a 열별 최대값 : [0.93112787 0.91484578 ... 0.62135503 0.95952193]
 a 열별 최소값 : [0.08247677 0.04483455 ... 0.05383681 0.05850934 0.09736856] 
 '''
 import numpy as np
-rg=np.random.default_rng(2) #난수생성기 seed값. 데이터 복원시 필요 
-a= rg.random((10,10)) #10행 10열 배열
-#a = np.random.random((10,10)) #seed값 설정안함
+#rg=np.random.default_rng(2) #난수생성기 seed값. 데이터 복원시 필요 
+#a= rg.random((10,10)) #10행 10열 배열
+a = np.random.random((10,10)) #seed값 설정안함
 a
 a.shape
 print("a 최대값 :",a.max())
@@ -137,5 +141,6 @@ array([-9,  5,  2,  0,  1,  2,  7,  8,  7,  0, -6, -3, -9,  0, -9, -3,  8,
         8, -9,  7,  1, -3,  4,  5, -6, -9,  7,  0, -3,  7,  0,  2])
 '''
 f=np.random.randint(10,size=100)
+f
 f[(f%3==0)] *= -1 #3의 배수만 True
 f

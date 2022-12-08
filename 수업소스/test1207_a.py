@@ -15,10 +15,10 @@ import re
 f=open("data/age.csv")
 data = csv.reader(f) #csv 형태의 파일을 읽어 저장
 type(data)    #csv형태 파일
-data  #반복문을 통해 한행씩 조회가능
+data  #반복문을 통해 한행씩 조회가능. 
 import matplotlib.pyplot as plt
-name="신림"
-for row in data :
+name="역삼"
+for row in data : #data를 반복문으로 읽으면, 다시 처음부터 시작 안함.
     if row[0].find(name) >= 0 : #행정구역의 내용에 name값존재?
         print(row)
 #        name=row[0]

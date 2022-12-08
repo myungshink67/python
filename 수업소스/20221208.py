@@ -372,3 +372,25 @@ mpg.kpl.head()
 # 반올림하기
 # round(1) : 소숫점 한자리로 반올림
 mpg["kpl"] = mpg["kpl"].round(1)
+mpg.kpl.head()
+mpg.info()
+#horsepower 컬럼의 값을 조회하기
+mpg.horsepower.unique()
+
+#오류데이터 : ? => 처리.
+#             horsepower컬럼은 숫자형
+# replace 함수 : 값을 변경
+# ? => 결측값 변경
+# np.nan : 결측값
+mpg["horsepower"].replace("?",np.nan,\
+                          inplace=True)
+mpg.info()    
+#horsepower값이 결측값인 행 조회하기
+mpg[mpg["horsepower"].isnull()]
+#horsepower값이 결측값인 행 삭제하기
+mpg.dropna(subset=["horsepower"],axis=0,inplace=True)
+mpg.info()
+#자료형을 실수형 변환하기
+#astype(자료형) : 모든 요소들은 자료형으로 변환.
+mpg["horsepower"] = mpg["horsepower"].astype("float")
+mpg.info()

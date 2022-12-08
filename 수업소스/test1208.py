@@ -31,6 +31,7 @@ test1208.py
 '''
 
 '''
-5. seaborn 모듈의 titanic 데이터를 이용하여 class별  생존 인원을 출력하시오
+5. seaborn 모듈의 titanic 데이터를 이용하여 class별  
+   생존 인원을 출력하시오
 ''' 
 

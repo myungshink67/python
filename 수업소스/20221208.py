@@ -367,3 +367,8 @@ mpg.info()
 #kpl : kilometer per liter mpg * 0.425
 mpg["kpl"]=mpg["mpg"]*0.425
 mpg.info()
+mpg.kpl.head()
+#kpl 컬럼의 데이터를 소숫점 1자리로 변경하기.
+# 반올림하기
+# round(1) : 소숫점 한자리로 반올림
+mpg["kpl"] = mpg["kpl"].round(1)

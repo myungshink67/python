@@ -15,6 +15,7 @@ titanic = sns.load_dataset("titanic")
   df_teenage 데이터에 저장하기
 '''
 df_teenage = titanic.loc[(titanic.age >= 10) & (titanic.age < 20)]
+df_teenage = titanic[(titanic.age >= 10) & (titanic.age < 20)]
 df_teenage["age"]
 df_teenage.age.value_counts()
 
@@ -23,29 +24,35 @@ df_teenage.age.value_counts()
  2타이타닉 승객중 10살미만의 여성 승객만 조회하기. 
   df_female_under10 데이터에 저장하기
 '''
-df_female_under10 = titanic[(titanic.age < 10) & (titanic.sex == 'female')]
+df_female_under10 = \
+    titanic[(titanic.age < 10) & (titanic.sex == 'female')]
 df_female_under10[["age","sex"]]
+len(df_female_under10)
 
 
 '''
 3 동행자(sibsp)의 수가 3,4,5인 승객들의 sibsp,alone컬럼 조회하기. 
    df_notalone 데이터에 저장
 '''
-df_notalone = titanic.loc[(titanic.sibsp==3)|(titanic.sibsp==4)|(titanic.sibsp==5)]
+df_notalone = \
+   titanic.loc[(titanic.sibsp==3)|(titanic.sibsp==4)|(titanic.sibsp==5)]
 df_notalone[["sibsp","alone"]]
+len(df_notalone)
 
 df_notalone = titanic.loc[titanic.sibsp.isin([3,4,5])]
 df_notalone[["sibsp","alone"]]
-
+len(df_notalone)
 '''
- 4. class 컬럼 중 First,Second인 행만 조회하기 df_class12 데이터에 저장
+ 4. class 컬럼 중 First,Second인 행만 조회하기 
+    df_class12 데이터에 저장
 '''
 
 df_class12 = titanic[titanic["class"].isin(["First","Second"])]
 df_class12["class"].value_counts()
 
-df_class12 = pd.concat([titanic.groupby("class").get_group("First"),
-           titanic.groupby("class").get_group("Second")],axis=0)
+df_class12 = \
+    pd.concat([titanic.groupby("class").get_group("First"),
+     titanic.groupby("class").get_group("Second")],axis=0)
 df_class12["class"].value_counts()
 
 
@@ -61,16 +68,18 @@ seoul.csv파일의 위치는 현재폴더의 data폴더에 존재한다고 가�
 import pandas as pd
 seoul=pd.read_csv('data/seoul.csv',encoding='cp949')
 print(seoul.head())
-
+seoul.info()
 '''
-6. 컬럼 명을 평균기온(℃) -> 평균기온, 최저기온(℃)->최저기온, 최고기온(℃)->최고기온으로 
+6. 컬럼 명을 평균기온(℃) -> 평균기온, 최저기온(℃)->최저기온,
+   최고기온(℃)->최고기온으로 
    컬럼명을 변경하는 코드를 작성하시오
 '''
 seoul.rename(columns={'평균기온(℃)':'평균기온','최저기온(℃)':'최저기온',\
                    '최고기온(℃)':'최고기온'},inplace=True)
+seoul.info()
 
-
-seoul.columns=["날짜","지점","평균기온","최저기온","최고기온"]
+seoul.columns=\
+    ["날짜","지점","평균기온","최저기온","최고기온"]
 print(seoul.columns)
 
 
@@ -94,16 +103,19 @@ print(seoul.head())
 Name: 6787, dtype: object
 
 '''
+#최고 기온으로 내림차순 정렬
 seoul1=seoul.sort_values(by='최고기온',ascending=False)
-seoul1.iloc[0]
+seoul1
+seoul1.iloc[0] #첫번째 레코드가 가장 더운날
 
-#seoul.최고기온.idxmax() : 최고기온의 최대값을 가지는 레코드의 인덱스 값 리턴
-seoul.iloc[seoul.최고기온.idxmax()]
+#seoul.최고기온.idxmax() : 
+#    최고기온의 최대값을 가지는 레코드의 인덱스 값 리턴
+seoul.loc[seoul.최고기온.idxmax()]
 
 
 '''
-9. 최고기온과 최저기온의 차를 저장하는 일교차 컬럼을 생성하고, 일교차가 가장 큰날짜를 출력
-하는 코드를 작성하시오
+9. 최고기온과 최저기온의 차를 저장하는 일교차 컬럼을 생성하고,
+ 일교차가 가장 큰날짜를 출력하는 코드를 작성하시오
 
 [결과]
 일교차가 가장 큰 날짜: 2015-04-18 ,일교차: 18.5
@@ -116,7 +128,7 @@ seoul2=seoul.sort_values(by='일교차',ascending=False)
 print('일교차가 가장 큰 날짜:',seoul2.iloc[0]['날짜'],',','일교차:',\
       seoul2.iloc[0]['일교차'])
 
-seoul2 = seoul.iloc[seoul.일교차.idxmax()]
+seoul2 = seoul.loc[seoul.일교차.idxmax()]
 print('일교차가 가장 큰 날짜:',seoul2['날짜'],',','일교차:',\
       seoul2['일교차'])
 seoul2    
@@ -133,10 +145,11 @@ dtype: float64
 
 '''
 seoul.mean()[["평균기온","최저기온","최고기온"]]
-
+seoul.mean()
 
 '''
-11. 월별 평균 일교차를 구하는 코드를 작성하시오. 월컬럼을 생성하기
+11. 월별 평균 일교차를 구하는 코드를 작성하시오.
+    월컬럼을 생성하기
 [결과]
 월 
 01 7.590762

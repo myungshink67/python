@@ -345,4 +345,15 @@ crime_Seoul["절도검거율"].sort_values().plot\
     
 police_state = \
    pd.read_csv("data/경찰관서 위치.csv",encoding="cp949")
-    
+police_Seoul = \
+    police_state.groupby("지방청").get_group("서울청")
+police_Seoul.info()
+police_Seoul = police_Seoul[["경찰서","주소"]]
+police_Seoul.info()
+police_Seoul["구별"]=\
+    police_Seoul["주소"].apply(lambda x : str(x).split()[1])
+police_Seoul.head()
+police_Seoul = police_Seoul.drop_duplicates("경찰서")
+police_Seoul
+police_Seoul["구별2"]=police_Seoul["주소"].str.split().str[1]
+police_Seoul.head()

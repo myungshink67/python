@@ -305,3 +305,82 @@ data.plot(kind="scatter",x="Sepal length",y="Sepal width",
         c="labels",cmap="Set1",colorbar=True,
         figsize=(7,7))
     
+#####################################
+# 수업안함
+#  DBScan :  
+#####################################
+# 군집 : DBSCAN 알고리즘. => 공간의 밀집도로 클러스터 구분 
+import pandas as pd
+import folium
+file_path = 'data/2016_middle_shcool_graduates_report.xlsx'
+df = pd.read_excel(file_path,  header=0)
+df.info()
+# df데이터에서 각 중학교의 정보를 지도로 표시하기
+mschool_map = folium.Map(location=[37.55,126.98], zoom_start=12)
+for name,lat,lng in zip(df.학교명,df.위도,df.경도) :
+    folium.CircleMarker([lat,lng],
+                        radius=5,color='brown', fill=True,fill_color='coral',
+                  fill_opacity=0.7, popup=name,tooltip=name).add_to(mschool_map)
+mschool_map.save('seoul_mscshool.location.html')    
+df.info()
+df.지역.unique()
+df.코드.unique()
+df.유형.unique()
+# 원핫인코딩 : 문자열 -숫자형. 컬럼 구분.
+#            preprocessing.OneHotEncoder()
+# label인코더 : 크기정보가 의미 없이, 단순한 종류인 경우.
+#               문자/숫자 -> 숫자형
+#            preprocessing.LabelEncoder()
+from sklearn import preprocessing
+label_encoder=preprocessing.LabelEncoder()
+onehot_encoder=preprocessing.OneHotEncoder()
+label_code = label_encoder.fit_transform(df["코드"])
+label_code
+df["코드"].values[:10]
+label_code[:10]
+df["코드"].unique()
+label_loc = label_encoder.fit_transform(df["지역"])
+label_loc
+label_type = label_encoder.fit_transform(df["유형"])
+label_type
+label_day = label_encoder.fit_transform(df["주야"])
+label_day
+#label_encoder 된 데이터를 df의 컬럼으로 추가
+df["code"]=label_code
+df["location"]=label_loc
+df["type"]=label_type
+df["day"]=label_day
+df.info()
+df["code"].unique()
+df["location"].unique()
+df["type"].unique()
+df["day"].unique()
+df.info()
+#속성변수 설정. 과학고,외고국제고,자사고 진학률로 분리하기
+X=df.iloc[:,[9,10,13]]
+X.info()
+#X 데이터 정규화
+X = preprocessing.StandardScaler().fit(X).transform(X)
+X[:5]
+# DBSCAN 알고리즘
+# eps=0.2 : 반지름 크기. 
+# min_samples=5 : 최소점의 갯수.
+#                 eps 영역내에 최소 5개의 점이 있으면 클러스터로 인정
+# cluster : 그룹
+# core point : 그룹화를 위한 중심점.
+# noise point : 그룹화 하지 못한 데이터. -1 설정
+
+dbm = cluster.DBSCAN(eps=0.2,min_samples=5)
+dbm.fit(X)
+cluster_label = dbm.labels_
+df["cluster"] = cluster_label
+df["cluster"].unique()
+df["cluster"].value_counts()
+
+#cluster로 그룹화 하여 레코드 조회하기
+for key,group in df.groupby("cluster") :
+    print("* cluster:", key)
+    print("* number :",len(group))
+    print(group.iloc[:,[0,1,3,9,10,13]].head())
+    print("\n")
+

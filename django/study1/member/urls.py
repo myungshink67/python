@@ -15,4 +15,6 @@ urlpatterns=[
     path("login/",views.login, name="login"),
     #http://127.0.0.1:8000/member/join/
     path('join/', views.join,name='join'),
+    path('main/', views.main, name='main'),
+
 ]

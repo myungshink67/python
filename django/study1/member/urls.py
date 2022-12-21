@@ -13,4 +13,6 @@ urlpatterns=[
     #http://127.0.0.1:8000/member/login/ 요청시 view.py
     #  의 login 함수 실행
     path("login/",views.login, name="login"),
+    #http://127.0.0.1:8000/member/join/
+    path('join/', views.join,name='join'),
 ]

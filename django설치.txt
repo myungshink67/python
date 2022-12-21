@@ -60,14 +60,25 @@ TIME_ZONE = 'Asia/Seoul'
  1. https://mariadb.org 파일 다운받기
     mariadb-10.10.2-winx64.msi => 설치하기
     root 사용자 비밀번호설정. remote checkbox, utf8한글 => 선택
-2. HeidiSQL : 윈도우 환경에서 sql 문장실행 
-3. root 연결하기. 비밀번호 입력
-   kic 사용자 생성 
-4. HeidiSQL kic 사용자 연결
-   데이터베이스 생성 : kicdb 
-5. item.sql의 문장을 쿼리탭에서 실행 
-   select * From item 문장실행. 결과 확인.
-6. anaconda prompt 
+2. HeidiSQL 실행
+ . root 연결하기. 비밀번호 입력
+   kic 사용자 생성. 권한 all
+ . HeidiSQL kic 사용자 연결
+   데이터베이스 생성 : kic
+
+3. spyder에서 settings.py 파일 변경.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'kic',
+        'USER' : 'kic',
+        'PASSWORD' : '1234',
+        'HOST' : 'localhost',
+        'PORT' : '3306'
+    }
+}
+
+4. anaconda prompt 
    - mysql 설치
      pip install mysqlclient
 

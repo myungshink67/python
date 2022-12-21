@@ -1,0 +1,84 @@
+############ Django 설치하기 
+1. anaconda prompt   
+   pip install Django  - 장고설치
+   python -m django --version  =>4.1.4    - 장고버전확인 
+   cd D:\20220811\python\django  - 설정폴더로 위치 변경 
+   d:   => 드라이브가 다른 경우만
+  - 프로젝트생성
+   django-admin startproject study1 => 프로젝트폴더
+  - 프로젝트 폴더로 이동  D:\20220811\python\django\study1
+    cd study1
+  - application 생성
+   python manage.py startapp member
+2. 파일 탐색기 실행
+   D:\20220811\python\django\study1\templates 폴더 생성
+
+3. spyder의 폴더를 D:\20220811\python\django\study1 폴더로 변경
+   - study1 폴더 
+settings.py 파일을 spyder에서 열기   
+
+INSTALLED_APPS = [
+         .....
+             'member',   추가
+]
+
+TEMPLATES = [
+    'DIRS': [BASE_DIR/'templates'], => 수정
+]
+LANGUAGE_CODE = 'ko-kr'
+TIME_ZONE = 'Asia/Seoul'
+
+4. 애플리케이션 개발하기 - spyder
+    (1)study1/urls.py : path('member/',include('member.urls'))  
+      .... import  path, include
+    (2)member/urls.py  파일 생성
+        from django.urls import path
+        from . import views
+        urlpatterns = [
+           path('login/',views.login,name='login')
+        ]
+    (3) member/views.py 
+        def login(request):  => 추가
+             return render(request, 'member/login.html')
+
+5. 파일 탐색기 실행
+   (1) templates/base1.html 파일 생성 
+   (2) templates/member 폴더 생성
+   (3) login.html 파일 생성
+
+6. anaconda prompt 
+   -study1 프로젝트와 db설정하기
+    python manage.py migrate
+   - server 연결하기 (기본 8000번포트 설정됨)
+    python manage.py runserver 
+
+7. 브라우저 띄우기
+  http://localhost:8000/member/login 
+
+
+----------------- maria db 추가하기
+ 1. https://mariadb.org 파일 다운받기
+    mariadb-10.10.2-winx64.msi => 설치하기
+    root 사용자 비밀번호설정. remote checkbox, utf8한글 => 선택
+2. HeidiSQL : 윈도우 환경에서 sql 문장실행 
+3. root 연결하기. 비밀번호 입력
+   kic 사용자 생성 
+4. HeidiSQL kic 사용자 연결
+   데이터베이스 생성 : kicdb 
+5. item.sql의 문장을 쿼리탭에서 실행 
+   select * From item 문장실행. 결과 확인.
+6. anaconda prompt 
+   - mysql 설치
+     pip install mysqlclient
+
+   -db설정하기
+    python manage.py migrate
+
+   - server 연결하기 (기본 8000번포트 설정됨)
+    python manage.py runserver
+
+   - db 수정 후
+    python manage.py makemigrations => db변경내용 적용. 
+    python manage.py migrate
+    
+'''

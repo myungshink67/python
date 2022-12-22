@@ -16,5 +16,10 @@ urlpatterns=[
     #http://127.0.0.1:8000/member/join/
     path('join/', views.join,name='join'),
     path('main/', views.main, name='main'),
-
+    path('logout/', views.logout, name='logout'),
+    path('info/<str:id>/', views.info,name='info'),
+    path('update/<str:id>/', views.update,name='update'),
+    path('delete/<str:id>/', views.delete,name='delete'),
+    path('list/', views.list,name='list'),
+    path('picture/', views.picture,name='picture'),
 ]

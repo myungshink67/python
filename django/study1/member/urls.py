@@ -22,4 +22,5 @@ urlpatterns=[
     path('delete/<str:id>/', views.delete,name='delete'),
     path('list/', views.list,name='list'),
     path('picture/', views.picture,name='picture'),
+    path('password/', views.password,name='password'),
 ]

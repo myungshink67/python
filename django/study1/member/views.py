@@ -3,6 +3,7 @@ from .models import Member
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 import time
+from decorator.decorator import loginIdchk
 # member/views.py
 #http://127.0.0.1:8000/member/login/ 요청시 호출되는 함수
 def login(request) :
@@ -22,9 +23,9 @@ def login(request) :
            #member.pass1 : db에 등록된 비밀번호
            #pass1 : 입력된 비밀번호
            if member.pass1 == pass1 :  #로그인 정상
+              request.session["login"] = id1  #session 객체에 login 등록.
               time.sleep(1)
               print("2:",request.session.session_key)
-              request.session["login"] = id1  #session 객체에 login 등록.
               return HttpResponseRedirect("../main")
            else :  #비밀번호 오류
                context = {"msg":"비밀번호가 틀립니다.","url":"../login/"}
@@ -55,21 +56,21 @@ def logout(request) :
     auth.logout(request) #세션종료
     return HttpResponseRedirect("../login/")
     
+
 # urls.py : info/<std:id>/ => info요청 url에서 id 값을 id
 #                             매개변수로 전달 
+@loginIdchk
 def info(request,id) :
+    '''    
     try :
       login = request.session["login"]
     except : #로그아웃상태
       context = {"msg":"로그인하세요","url":"../../login"}
       return render(request,"alert.html",context)
-    else : #로그인 상태
-      if login == id or login == 'admin' :
-          member = Member.objects.get(id=id)
-          return render(request,"member/info.html",{"mem":member})
-      else :
-        context = {"msg":"본인만 가능합니다.","url":"../../main"}
-        return render(request,"alert.html",context)
+    '''  
+#   else : #로그인 상태
+    member = Member.objects.get(id=id)
+    return render(request,"member/info.html",{"mem":member})
     
 def update(request,id) :
     try :
@@ -167,10 +168,37 @@ def picture(request) :
        fname = request.FILES["picture"].name
        handle_upload(request.FILES["picture"])
        return render(request,"member/picture.html",{"fname":fname})
-
-def handle_upload(f) :
+'''
+   BASE_DIR\file\picture 폴더 생성 : 이미지 업로드 폴더
+'''
+def handle_upload(f) :  #f:업로드된 이미지파일의 내용
     with open("file/picture/"+f.name,"wb") as dest : #close 생략 가능
         #f.chunks() : 이진파일 읽기.
         for ch in f.chunks() :
             dest.write(ch)
             
+def password(request) :
+    try :
+        login=request.session["login"]
+    except :
+        context={"msg":"로그인하세요","url":"../login/"}
+        return render(request,"alert.html",context)    
+    
+    if request.method != "POST" :
+       return render(request,"member/passwordform.html")        
+    else :
+       member = Member.objects.get(id=login)   
+       if member.pass1 == request.POST["pass"] :  #비밀번호 비교
+          member.pass1 = request.POST["chgpass"] #변경할 비밀번호로 비밀번호값 수정
+          member.save() #수정
+          context={"msg":"비밀번호 수정 완료",\
+          "url":"../info/"+login+"/","closer":True}
+          return render(request,"member/password.html",context)        
+       else :  #비밀번호 오류
+          context={"msg":"비밀번호 오류",\
+          "url":"../password/","closer":False}
+          return render(request,"member/password.html",context)        
+           
+'''
+  python manage.py startapp board => board app 생성
+'''       

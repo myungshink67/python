@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "member",
+    "board",
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "study1.urls"
+SESSION_COOKIE_AGE = 3600 #세션 유지시간 설정
 
 TEMPLATES = [
     {
@@ -116,7 +118,8 @@ TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
-USE_TZ = True
+#USE_TZ = True
+USE_TZ = False  #UTC 적용 안함. 
 
 
 # Static files (CSS, JavaScript, Images)
@@ -131,3 +134,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 import os
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] #css,js 파일의 폴더 설정
+#파일 업로드 폴더, URL 설정
+MEDIA_URL="/file/"
+MEDIA_ROOT=os.path.join(BASE_DIR,"file")
+

@@ -3,7 +3,8 @@ from .models import Member
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 import time
-from decorator.decorator import loginIdchk
+from decorator.decorator import loginIdchk,loginchk
+
 # member/views.py
 #http://127.0.0.1:8000/member/login/ 요청시 호출되는 함수
 def login(request) :
@@ -47,6 +48,7 @@ def join(request) :
        member.save() #insert 문장 실행.
        return HttpResponseRedirect("../login/")
 
+@loginchk
 def main(request):
    print("3",request.session.session_key)
    return render(request, 'member/main.html')

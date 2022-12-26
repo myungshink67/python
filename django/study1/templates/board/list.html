@@ -13,7 +13,7 @@
 			<td width="8%">번호</td><td width="50%">제목</td>
 			<td width="14%">작성자</td><td width="17%">날짜</td>
 			<td width="11%">조회수</td></tr>
-        {% for bo in board %} {# 게시글 출력#}
+        {% for bo in board %} {# 게시글 출력 : bo:게시물 한개 저장#}
 			<tr align="center" valign="middle">
 				<td>{{bo.num}}</td><td align="left">
           {# 첨부 파일이 존재하면 @로 표시함 #}
@@ -22,7 +22,7 @@
                 {% else  %} {# 첨부 파일이 없는 경우 공백 표시함 #}
                     &nbsp;&nbsp;&nbsp;
                 {% endif %}
-          {# 첨부 파일 종료 #}
+          {# 첨부 파일 표시 종료 #}
                 <a	href="../info/{{bo.num}}/">{{bo.subject}}</a></td>
 				<td>{{bo.name}}</td><td>{{bo.regdate}}</td>
 				<td>{{bo.readcnt}}</td></tr>

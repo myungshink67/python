@@ -11,5 +11,7 @@ urlpatterns=[
     path("write/",views.write,name="write"),
     path("list/",views.list,name="list"),
     path("info/<int:num>/",views.info,name="info"),
+    path('update/<int:num>/', views.update,name='update'),
+    path('delete/<int:num>/', views.delete, name='delete'),
 ]
 

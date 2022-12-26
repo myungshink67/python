@@ -3,7 +3,7 @@
 Created on Fri Dec 23 09:53:36 2022
 
 @author: KITCOOP
-decorator.py
+decorator.py : decorator 함수 모음
 """
 from django.shortcuts import render
 
@@ -18,8 +18,8 @@ def loginIdchk(func):
            if login != id and login != 'admin' :
               context = {"msg":"본인만 가능합니다.","url":"../../main"}
               return render(request,"alert.html",context)
+          
         return func(request, id)
-        
     return check
 
 def loginchk(func):

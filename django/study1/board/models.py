@@ -11,7 +11,7 @@ class Board(models.Model) :
     pass1 = models.CharField(max_length=20)
     subject = models.CharField(max_length=100)    
     content = models.CharField(max_length=4000)        
-    regdate = models.DateTimeField()
+    regdate = models.DateTimeField(null=True) #null 허용
     readcnt = models.IntegerField(default=0)
     file1 = models.CharField(max_length=300)
     

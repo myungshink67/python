@@ -3,6 +3,7 @@ from .models import Board  #현재 폴더의 models.py
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator            
+import traceback  #실행 예외의 메세지 출력
 
 # Create your views here.
 def write(request) :    #게시판 등록
@@ -60,3 +61,65 @@ def info(request,num) :
     board.save()        #db에 조회건수 저장
     return render(request,"board/info.html",{"b":board})
     
+def update(request, num):
+    if request.method != 'POST':
+        board = Board.objects.get(num=num)
+        return render(request, 'board/update.html',{'b': board})
+#  1. 비밀번호 검증.
+#     오류 : 비밀번호 오류 메세지 출력. update 화면 페이지 이동
+#  2. 내용 수정
+#     수정완료 : 상세보기 페이지 이동
+#     수정실패 : 메세지 출력 후 update 화면 페이지 이동
+    else :
+        board = Board.objects.get(num=num)
+        pass1 = request.POST["pass"]
+        if board.pass1 != pass1 :
+            context = {"msg":"비밀번호 오류","url":"../../update/"+str(num) + "/"}
+            return render(request,"alert.html",context)
+        try :
+            filename = request.FILES["file1"].name
+            handle_upload(request.FILES["file1"])
+        except :
+            filename = ""
+        try :
+            if filename == "" :
+               filename = request.POST["file2"]
+            b=Board(num=num,\
+                    name=request.POST["name"],\
+                    pass1=request.POST["pass"],\
+                    subject=request.POST["subject"],\
+                    content=request.POST["content"],\
+                    file1=filename)   
+            b.save()
+            return HttpResponseRedirect("../../list/")
+        except Exception as e :
+            print(traceback.format_exc()) #runserver 콘솔창에 오류 메세지 출력
+            context = {"msg":"게시물 수정 실패",\
+                       "url":"../../update/"+str(num) + "/"}
+            return render(request,"alert.html",context)
+            
+# 게시물 삭제하기
+def delete (request, num):
+    if request.method != 'POST':
+        return render(request, 'board/delete.html',{"num":num})
+    else :
+# 1. 비밀번호 검증
+#    오류 : 비밀번호 오류 메세지 출력. delete 페이지 출력
+# 2. 해당 게시물 삭제.
+#    게시물 목록(list) 페이지 출력        
+       b=Board.objects.get(num=num)
+       pass1 = request.POST["pass"]
+       if pass1 != b.pass1 :
+          context = {"msg":"비밀번호 오류",\
+                       "url":"../../delete/"+str(num) + "/"}
+          return render(request,"alert.html",context)
+       try :
+          b.delete()
+          return HttpResponseRedirect("../../list/")
+       except :
+          print(traceback.format_exc()) #runserver 콘솔창에 오류 메세지 출력
+          context = {"msg":"게시물 삭제 실패",\
+                       "url":"../../delete/"+str(num) + "/"}
+          return render(request,"alert.html",context)
+          
+           

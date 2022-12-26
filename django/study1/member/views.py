@@ -3,6 +3,9 @@ from .models import Member
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 import time
+# decorator.decorator :
+#                   decorator 패키지(폴더)의
+#                   decorator.py 소스 import
 from decorator.decorator import loginIdchk,loginchk
 
 # member/views.py

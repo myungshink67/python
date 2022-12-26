@@ -61,12 +61,14 @@ image = cv2.imread("images/read_color.jpg",cv2.IMREAD_COLOR)
 #cv2.IMWRITE_JPEG_QUALITY,10 : 화질설정
 #              0 ~ 100(95) : 숫자가 높으면 화질이 좋음
 params_jpg = (cv2.IMWRITE_JPEG_QUALITY,10) # 튜플,리스트 가능
+#cv2.IMWRITE_PNG_COMPRESSION,9 : png 파일의 압축레벨 설정
+#                   0 ~ 9(3) : 압축레벨이 높으면 이미지 용량이 작다.
 params_png = [cv2.IMWRITE_PNG_COMPRESSION,9] # 튜플,리스트 가능
 #imwrite : 배열데이터를 이미지파일로 저장
 cv2.imwrite("images/write_test0.png",image) #204K 확장자에 맞춰서 이미지 등록
 cv2.imwrite("images/write_test1.jpg",image) #51k
 cv2.imwrite("images/write_test2.jpg",image,params_jpg) #6k
 cv2.imwrite("images/write_test3.png",image,params_png) #171k
-cv2.imwrite("images/write_test4.bmp",image)
+cv2.imwrite("images/write_test4.bmp",image)   #352k
 cv2.imwrite("images/write_test5.jpg",image,\
-            (cv2.IMWRITE_JPEG_QUALITY,100))
+            (cv2.IMWRITE_JPEG_QUALITY,100))   #90k

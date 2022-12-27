@@ -23,6 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("member/", include("member.urls")),
     path("board/", include("board.urls")),
+    path('num/', include('num.urls')),
 ]
 #파일 업로드 위치 설정
 urlpatterns += \

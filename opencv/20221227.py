@@ -214,8 +214,8 @@ train_data.shape # (50000, 784) 50000개의 행. 숫자이미지 행.
 #                    784 : 28*28 => 1차원배열로 생성.
 #                    50000개의 숫자 이미지값.
 train_label.shape  #50000. 정답.
-test_data.shape
-valid_data.shape
+test_data.shape #(10000,784)
+valid_data.shape #(10000,784)
 #이미지 출력하기
 def graph_image(data, lable, title, nsample):
     plt.figure(num=title, figsize=(6, 9))
@@ -233,9 +233,17 @@ def graph_image(data, lable, title, nsample):
     
 graph_image(train_data, train_label, 'label', 24)   
 #학습하기
-knn = cv2.ml.KNearest_create() 
+knn = cv2.ml.KNearest_create() #KNN 알고리즘.
+#훈련하기.
+#train_data : 훈련데이터. 50000개.
+#cv2.ml.ROW_SAMPLE : 행값이 데이터. 1개행이 학습 데이터 1개. 
+#train_label : 정답
 knn.train(train_data, cv2.ml.ROW_SAMPLE, train_label)
+#예측하기. 
+#test_data[:100] : 100개만 예측하기.
+#k=5 : knn알고리즘 근접한 5개의 점을 선택. 
 _, resp, _ , _ = knn.findNearest(test_data[:100], k=5)
+#resp.flatten() : 1차원배열로 변경. [[값]]
 accur = sum(test_label[:100] == resp.flatten()) / len(resp)
 print("정확도=", accur*100, '%')
 graph_image(test_data[:100], resp, 'predict', 24)

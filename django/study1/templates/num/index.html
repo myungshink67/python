@@ -5,7 +5,7 @@
 {% block content %}
 <div style="padding-bottom:15px;width:98%;">
      <br />
-    <canvas id="canvas" width="300" height="150" 
+    <canvas id="canvas" width="150" height="150" 
             style="position: relative; border: 1px solid #000;"></canvas>
     <br />
         <a href="#" onclick="onClear();">지우기</a>
@@ -42,7 +42,7 @@ function onClear() {
 function draw(x, y) {
   if (isDrawing) {
     c.beginPath();
-    c.arc(x, y, 5, 0, Math.PI*2);
+    c.arc(x, y, 10, 0, Math.PI*2);
     c.closePath();
     c.fill();
   }

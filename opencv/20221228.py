@@ -110,12 +110,20 @@ image1.shape
 cv2.imshow("image1", image1)
 cv2.imshow("image2", image2)
 
-h, w = image1.shape[:2]
+h, w = image1.shape[:2] #300,300
 print(h,w)
 cx,cy  = w//2, h//2
 print(cx,cy)
+#원을 표시.
+#(cx,cy) : 원의 중심 좌표
+#100 : 반지름
+#255 : 색상값
 cv2.circle(image1, (cx,cy), 100, 255, -1) 	# 중심에 원 그리기
+#사각형 표시
+#(0,0, cx, h) : (시작x좌표,시작y좌표,w,h)
+#255 : 색상값
 cv2.rectangle(image2, (0,0, cx, h), 255, -1)
+#두개의 이미지 합하기
 image3 = cv2.bitwise_or(image1, image2)    	# 원소 간 논리합
 image4 = cv2.bitwise_and(image1, image2)   	# 원소 간 논리곱
 image5 = cv2.bitwise_xor(image1, image2)   	# 원소 간 배타적 논리합

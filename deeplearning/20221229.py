@@ -106,7 +106,7 @@ np.__version__
 #텐서플로를 이용한 AND/OR 게이트 구현
 data = np.array([[0,0],[0,1],[1,0],[1,1]])
 #label = np.array([[0],[0],[0],[1]]) #결과데이터 AND
-#label = np.array([[0],[1],[1],[1]]) #결과데이터 OR
+label = np.array([[0],[1],[1],[1]]) #결과데이터 OR
 label = np.array([[0],[1],[1],[0]]) #결과데이터 XOR
 
 from tensorflow.keras.models import Sequential
@@ -149,4 +149,5 @@ model.fit(data,label,epochs=300,verbose=2)
 print(model.get_weights())
 print(model.predict(data))
 print(model.evaluate(data,label))
+
 

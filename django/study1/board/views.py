@@ -123,3 +123,7 @@ def delete (request, num):
           return render(request,"alert.html",context)
           
            
+
+
+df = pd.DataFrame({'num_legs': [4, 2], 'num_wings': [0, 2]},\
+                  index=['dog', 'hawk'])

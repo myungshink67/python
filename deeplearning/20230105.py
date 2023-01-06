@@ -194,7 +194,7 @@ history = model.fit(train_generator,
            steps_per_epoch=get_steps(len(train_df), batch_size),
            validation_data = val_generator, 
            validation_steps=get_steps(len(val_df), batch_size),
-           epochs = 3)
+           epochs = 20)
 
 import matplotlib.pyplot as plt
 batch = next(train_generator)
@@ -230,7 +230,7 @@ test_generator = test_datagen.flow_from_dataframe(
 #예측하기
 preds = model.predict(test_generator, steps = 32)
 preds[0] #9.9783474e-01, 3.8876748e-04, 8.1772832e-03, ....
-off = 16
+off = 8
 do_preds = preds[off:off+8] #8개씩 이미지 조회
 class_col
 for i, pred in enumerate(do_preds):
